@@ -3025,8 +3025,20 @@ namespace easyBlack {
       createDTS(pin, pinData, dtsFilename);
       createDTBO(dtboFilename, dtsFilename);
 
-      std::string sysDevices = "/sys/devices/";
-      std::string boneCapeMgr = easyUtils::findPatternInPath(sysDevices, "bone_capemgr.");
+      std::string sysDevices;
+      std::string capeMgr;
+      if(oldKernel)
+      {
+        sysDevices = "/sys/devices/";
+        capeMgr = "bone_capemgr.";
+      }
+      else
+      {
+        sysDevices = "/sys/devices/platform/";
+        capeMgr = "bone_capemgr";
+      }
+
+      std::string boneCapeMgr = easyUtils::findPatternInPath(sysDevices, capeMgr);
 
       if (boneCapeMgr.empty ()) {
         std::cout << "Unable to find the bone_capemgr path in " << sysDevices << "!" << std::endl;
