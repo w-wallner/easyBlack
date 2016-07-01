@@ -263,7 +263,7 @@ namespace easyBlack {
 
       // Get kernel version.
       sscanf (uName.release, "%d.%d.", &major, &minor);
-      if (major >= 3 && minor >= 8) {
+      if ((major > 3) || (major >= 3 && minor >= 8)) {
         oldKernel = false;
       }
       else {
